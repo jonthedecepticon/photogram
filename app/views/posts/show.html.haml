@@ -2,13 +2,17 @@
   .post
     .post-head
       .name
-        Ben Walker
+        = @post.user.user_name
     .image.center-block
       =image_tag @post.image.url(:medium)
     %p.caption
       =@post.caption
+    - if @post.user.id == current_user.id
     .text-center.edit-links
       = link_to "Edit", edit_post_path(@post), :class => 'btn btn-success'
       |
       = link_to "Back", posts_path, :class => 'btn btn-danger'
+    - else
+    .text-center.edit-links
+      = link_to "Back", posts_path
 
